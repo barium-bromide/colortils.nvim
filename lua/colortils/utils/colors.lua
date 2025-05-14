@@ -264,7 +264,7 @@ function utils_color.get_colors(color_string)
         {
             colors = function(match)
                 local values = {
-                    match:match("rgb%(%s*(%d+)%s*,%s*(%d+)%s*,%s*(%d+)%s*%)"),
+                    match:match("rgb%(%s*(%d+)%s*,?%s*(%d+)%s*,?%s*(%d+)%s*%)"),
                 }
                 return {
                     tonumber(values[1]),
@@ -274,12 +274,12 @@ function utils_color.get_colors(color_string)
             end,
             transparency = false,
             name = "rgb",
-            pattern = "rgb%(%s*%d+%s*,%s*%d+%s*,%s*%d+%s*%)",
+            pattern = "rgb%(%s*%d+%s*,?%s*%d+%s*,?%s*%d+%s*%)",
         },
         {
             colors = function(match)
                 local values = {
-                    match:match("rgba%((%d+)%s*,%s*(%d+)%s*,%s*(%d+)%s*,%s*(%d+%.?%d*)%s*%)"),
+                    match:match("rgba%((%d+)%s*,?%s*(%d+)%s*,?%s*(%d+)%s*,?/?%s*(%d+%.?%d*)%s*%)"),
                 }
                 return {
                     tonumber(values[1]),
@@ -290,12 +290,12 @@ function utils_color.get_colors(color_string)
             end,
             transparency = true,
             name = "rgba",
-            pattern = "rgba%(%d+%s*,%s*%d+%s*,%s*%d+%s*,%s*%d+%.?%d*%s*%)",
+            pattern = "rgba%(%d+%s*,?%s*%d+%s*,?%s*%d+%s*,?/?%s*%d+%.?%d*%s*%)",
         },
         {
             colors = function(match)
                 local values = {
-                    match:match("rgb%(%s*(%d+)%%%s*,%s*(%d+)%%%s*,%s*(%d+)%%%s*%)"),
+                    match:match("rgb%(%s*(%d+)%%%s*,?%s*(%d+)%%%s*,?%s*(%d+)%%%s*%)"),
                 }
                 return {
                     tonumber(values[1]) / 100 * 255,
@@ -305,12 +305,12 @@ function utils_color.get_colors(color_string)
             end,
             transparency = false,
             name = "rgb percentage",
-            pattern = "rgb%(%d+%%%s*,%s*%d+%%%s*,%s*%d+%%%s*%)",
+            pattern = "rgb%(%d+%%%s*,?%s*%d+%%%s*,?%s*%d+%%%s*%)",
         },
         {
             colors = function(match)
                 local values = {
-                    match:match("rgba%((%d+)%%%s*,%s*(%d+)%%%s*,%s*(%d+)%%%s*,%s*(%d+%.?%d?)%s*%)"),
+                    match:match("rgba%((%d+)%%%s*,?%s*(%d+)%%%s*,?%s*(%d+)%%%s*,?/?%s*(%d+%.?%d?)%s*%)"),
                 }
                 return {
                     tonumber(values[1]) / 100 * 255,
@@ -320,31 +320,33 @@ function utils_color.get_colors(color_string)
             end,
             transparency = true,
             name = "rgba percentage",
-            pattern = "rgba%(%d+%%%s*,%s*%d+%%%s*,%s*%d+%%%s*,%s*%d+%.?%d*%s*%)",
+            pattern = "rgba%(%d+%%%s*,?%s*%d+%%%s*,?%s*%d+%%%s*,?/?%s*%d+%.?%d*%s*%)",
         },
         {
             colors = function(match)
                 local values = {
-                    match:match("hsl%((%d+%.?%d?)%s*,%s*(%d+%.?%d?)%%%s*,%s*(%d+%.?%d?)%%%s*%)"),
+                    match:match("hsl%((%d+%.?%d?)%s*,?%s*(%d+%.?%d?)%%%s*,?%s*(%d+%.?%d?)%%%s*%)"),
                 }
                 local rgb = utils_color.hsl_to_rgb(values[1], values[2], values[3])
                 return { rgb[1], rgb[2], rgb[3] }
             end,
             transparency = false,
             name = "hsl",
-            pattern = "hsl%(%d+%.?%d?%s*,%s*%d+%.?%d?%%%s*,%s*%d+%.?%d?%%%s*%)",
+            pattern = "hsl%(%d+%.?%d?%s*,?%s*%d+%.?%d?%%%s*,?%s*%d+%.?%d?%%%s*%)",
         },
         {
             colors = function(match)
                 local values = {
-                    match:match("hsla%((%d+%.?%d?)%s*,%s*(%d+%.?%d?)%%%s*,%s*(%d+%.?%d?)%%%s*,%s*(%d+%.?%d?)%s*%)"),
+                    match:match(
+                        "hsla%((%d+%.?%d?)%s*,?%s*(%d+%.?%d?)%%%s*,?%s*(%d+%.?%d?)%%%s*,?/?%s*(%d+%.?%d?)%s*%)"
+                    ),
                 }
                 local rgb = utils_color.hsl_to_rgb(values[1], values[2], values[3], values[4])
                 return { rgb[1], rgb[2], rgb[3], rgb[4] }
             end,
             transparency = true,
             name = "hsla",
-            pattern = "hsla%(%d+%s*,%s*%d+%%%s*,%s*%d+%%%s*,%s*%d+%.?%d*%s*%)",
+            pattern = "hsla%(%d+%s*,?%s*%d+%%%s*,?%s*%d+%%%s*,?/?%s*%d+%.?%d*%s*%)",
         },
     }
     local colors = {}
