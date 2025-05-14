@@ -3,6 +3,7 @@
 <img src="res/colortils.svg" width=300>
 
 # Colortils.nvim - Neovim color utils
+based off (max397574/colortils.nvim)[https://github.com/max397574/colortils.nvim]
 
 </div>
 
