@@ -6,8 +6,9 @@
 
 </div>
 
-based off [max397a74/colortils.nvim](https://github.com/max397574/colortils.nvim)
 https://user-images.githubusercontent.com/81827001/187237256-e8b736cc-17f3-4521-a2ad-3c814b503481.mov
+
+based off [max397a74/colortils.nvim](https://github.com/max397574/colortils.nvim)
 
 ## ✨ Features
 - rgb color picker
